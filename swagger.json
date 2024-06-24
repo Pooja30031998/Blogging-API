@@ -1,0 +1,530 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "description": "API for social networking platform",
+    "title": "Social networking platform"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3500"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "JWT": {
+        "in": "cookie",
+        "name": "jwtToken",
+        "type": "apiKey"
+      }
+    }
+  },
+
+  "paths": {
+    "/api/users/signin": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login",
+        "description": "User login to get token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid Credentials"
+          }
+        }
+      }
+    },
+
+    "/api/users/signout": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Logout",
+        "description": "User logout to clear cookie",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not signed in yet"
+          }
+        }
+      }
+    },
+
+    "/api/users/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Register",
+        "description": "User register to login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/api/posts": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get User Posts",
+        "description": "User will get posts posted by them",
+        "security": [{ "JWT": {} }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "summary": "Add Posts",
+        "description": "User can add new posts",
+        "security": [{ "JWT": {} }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+
+    "/api/posts/all": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get All Posts",
+        "description": "User will get all products",
+        "security": [{ "JWT": {} }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+
+    "/api/posts/{id}": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Filter",
+        "description": "User can get one post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can get one product by post id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Post not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete",
+        "description": "Delete a  post using id",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can delete a post using id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "post not found (or) Post not posted by this user"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Update",
+        "description": "Update a cart item using id",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can Update a cart item using id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "post not found (or) Post not posted by this user"
+          }
+        }
+      }
+    },
+
+    "/api/posts/filter?search": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Filter",
+        "description": "User can filter posts based on post caption",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string",
+              "description": "User can search based on post caption"
+            },
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+
+    "/api/comments/{id}": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Filter",
+        "description": "User can retrieve all comments for a specific post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can retrieve all comments for a specific post by post id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No Comments found for this post"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Post comment",
+        "description": "User can add a new comment for a specific post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can add a new comment for a specific post by post id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No post of this postID found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Delete comment",
+        "description": "Delete a specific comment",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can delete a specific comment using id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No comment of this commentID found (or) This comment is not posted by this user. Thus comment can't be deleted"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Comments"],
+        "summary": "Update comment",
+        "description": "Update a specific comment",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can Update a specific comment using id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No comment of this commentID found (or) This comment is not posted by this user. Thus comment can't be updated"
+          }
+        }
+      }
+    },
+
+    "/api/likes/{id}": {
+      "get": {
+        "tags": ["Likes"],
+        "summary": "Retrieve all likes for a post",
+        "description": "User can retrieve all likes for a specific post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can retrieve all likes for a specific post",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No post of this postID found (or) No likes found for the given post ID"
+          }
+        }
+      }
+    },
+    "/api/likes/toggle/{id}": {
+      "get": {
+        "tags": ["Likes"],
+        "summary": "Toggle like status",
+        "description": "User can toggle like status for a specific post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can toggle like status for a specific post by post id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No post of this postID found"
+          }
+        }
+      }
+    },
+
+    "/api/bookmarks": {
+      "get": {
+        "tags": ["Bookmarks"],
+        "summary": "Retrieve all bookmarked posts",
+        "description": "User can retrieve all of his/her bookmarked posts",
+        "security": [{ "JWT": {} }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No bookmarked posts found"
+          }
+        }
+      }
+    },
+    "/api/bookmarks/toggle/{id}": {
+      "get": {
+        "tags": ["Bookmarks"],
+        "summary": "Toggle bookmark status",
+        "description": "User can toggle bookmark status for a specific post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User can toggle bookmark status for a specific post by post id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No post of this postID found"
+          }
+        }
+      }
+    }
+  }
+}

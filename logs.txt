@@ -1,0 +1,15 @@
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:13:03 GMT+0530 (India Standard Time), RequestUrl: /api/posts, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:13:16 GMT+0530 (India Standard Time), RequestUrl: /api/posts, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:13:46 GMT+0530 (India Standard Time), RequestUrl: /api/bookmarks, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:14:43 GMT+0530 (India Standard Time), RequestUrl: /api/posts/filter?search=cat, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:15:26 GMT+0530 (India Standard Time), RequestUrl: /api/comments/1, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:15:53 GMT+0530 (India Standard Time), RequestUrl: /api/comments/1, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:16:19 GMT+0530 (India Standard Time), RequestUrl: /api/likes/1, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:16:33 GMT+0530 (India Standard Time), RequestUrl: /api/likes/toggle/2, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:16:40 GMT+0530 (India Standard Time), RequestUrl: /api/likes/toggle/2, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:16:53 GMT+0530 (India Standard Time), RequestUrl: /api/bookmarks/toggle/2, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 14:16:58 GMT+0530 (India Standard Time), RequestUrl: /api/bookmarks/toggle/2, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 16:15:07 GMT+0530 (India Standard Time), RequestUrl: /api/posts, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 16:56:38 GMT+0530 (India Standard Time), RequestUrl: /api/posts/all, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 16:57:36 GMT+0530 (India Standard Time), RequestUrl: /api, RequestBody: [object Object]","service":"request-logger"}
+{"level":"info","message":"Timestamp: Wed May 29 2024 16:57:36 GMT+0530 (India Standard Time), RequestUrl: /favicon.ico, RequestBody: [object Object]","service":"request-logger"}
